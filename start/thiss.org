@@ -1,0 +1,14 @@
+<insert>
+Build the social tech. 
+
+My first page would have only these nine projects:
+
+LibCST
+MonkeyType
+Fixit
+IGListKit
+React
+PyTorch
+GraphQL
+RocksDB
+Folly
