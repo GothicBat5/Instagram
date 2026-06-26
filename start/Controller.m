@@ -14,12 +14,16 @@
 
 - (NSHashTable *)_associatedListAdaptersTable {
     NSHashTable *table = objc_getAssociatedObject(self, @selector(_associatedListAdaptersTable));
-    if (table) {
+    
+    if (table) 
+    {
         return table;
     }
 
     table = [NSHashTable weakObjectsHashTable];
-    objc_setAssociatedObject(self, @selector(_associatedListAdaptersTable), table, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(_associatedListAdaptersTable), 
+    table, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
     return table;
 }
 
