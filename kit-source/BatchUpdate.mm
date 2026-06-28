@@ -10,9 +10,9 @@
 #import "IGListCompatibility.h"
 
 static void convertMoveToDeleteAndInsert(NSMutableSet<IGListMoveIndex *> *moves,
-                                         IGListMoveIndex *move,
-                                         NSMutableIndexSet *deletes,
-                                         NSMutableIndexSet *inserts) {
+                                         IGListMoveIndex *move, NSMutableIndexSet *deletes,
+                                         NSMutableIndexSet *inserts) 
+{
     [moves removeObject:move];
 
     [deletes addIndex:move.from];
@@ -24,7 +24,8 @@ static void convertMoveToDeleteAndInsert(NSMutableSet<IGListMoveIndex *> *moves,
                          moves:(NSMutableSet<IGListMoveIndex *> *)moves
                     indexPaths:(NSMutableArray<NSIndexPath *> *)indexPaths
                        deletes:(NSMutableIndexSet *)deletes
-                       inserts:(NSMutableIndexSet *)inserts {
+                       inserts:(NSMutableIndexSet *)inserts 
+                       {
     if (indexPaths.count == 0) 
     {
         return;
@@ -172,5 +173,4 @@ static void convertMoveToDeleteAndInsert(NSMutableSet<IGListMoveIndex *> *moves,
             (unsigned long)self.deleteIndexPaths.count, (unsigned long)self.insertIndexPaths.count, 
             (unsigned long)self.updateIndexPaths.count];
 }
-
 @end
