@@ -7,8 +7,7 @@ function generate_ig_list_diff_kit_spm_public_headers() {
     echo "Generate symbolic links for all public headers. *.h"
     echo "Generated under ${SPM_IG_LIST_DIFF_KIT_PUBLIC_HEADERS_PATH}"
 
-    public_headers_list=$(
-        find "Source/IGListDiffKit" \
+    public_headers_list=$(find "Source/IGListDiffKit" \
         -type f -name "*.[h]" \
         -not -path "spm/*" \
         -not -path "Source/IGListDiffKit/Internal/*" \
@@ -108,15 +107,13 @@ function generate_ig_list_kit_spm_private_headers() {
     echo "Generate symbolic links for all private headers/implementations *.h && *.m"
     echo "Generated under ${SPM_IG_LIST_KIT_SOURCES_PATH}"
 
-    shared_ig_diff_kit_sorces_list=$(find "Source/IGListDiffKit/Internal" \
-        -name "*.[hm]" -o -name "*.mm" \
+    shared_ig_diff_kit_sorces_list=$(find "Source/IGListDiffKit/Internal" \ -name "*.[hm]" -o -name "*.mm" \
         -type f -not -path "spm/*" \
         -not -path "Examples/*" | sed "s| \([^/]\)|:\1|g")
 
     private_headers_list=$(find "Source/IGListKit/Internal" \
         -name "*.h" \
-        -type f -not -path "spm/*" \
-        -not -path "Examples/*" | sed "s| \([^/]\)|:\1|g")
+        -type f -not -path "spm/*" \ -not -path "Examples/*" | sed "s| \([^/]\)|:\1|g")
 
     SRC_ROOT=$(pwd)
     cd $SPM_IG_LIST_KIT_SOURCES_PATH
@@ -128,7 +125,6 @@ function generate_ig_list_kit_spm_private_headers() {
 
     for private_file in $private_headers_list; do
         file_to_link=$(echo $private_file | sed "s|:| |g")
-
         ln -s ../../../$file_to_link
     done
 
@@ -158,15 +154,13 @@ function generate_ig_list_kit_spm_sources() {
 
     cd $SRC_ROOT
 
-    echo "      Done"
+    echo "Done"
     echo ""
 }
 
 function generate_ig_list_kit() {
     generate_ig_list_kit_spm_public_headers
-
     generate_ig_list_kit_spm_private_headers
-
     generate_ig_list_kit_spm_sources
 }
 
@@ -177,8 +171,7 @@ function generate_ig_list_swift_kit_spm_sources() {
     echo "Generated under ${SPM_IG_LIST_SWIFT_KIT_SOURCES_PATH}"
 
     sources_list=$(
-        find "Source/IGListSwiftKit" \
-        -type f -name "*.swift" \
+        find "Source/IGListSwiftKit" \ -type f -name "*.swift" \
         -not -path "spm/*" | sed "s| \([^/]\)|:\1|g")
 
     SRC_ROOT=$(pwd)
