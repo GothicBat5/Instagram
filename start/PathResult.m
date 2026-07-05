@@ -11,8 +11,11 @@
                         updates:(NSArray<NSIndexPath *> *)updates
                           moves:(NSArray<IGListMoveIndexPath *> *)moves
                 oldIndexPathMap:(NSMapTable<id<NSObject>, NSIndexPath *> *)oldIndexPathMap
-                newIndexPathMap:(NSMapTable<id<NSObject>, NSIndexPath *> *)newIndexPathMap {
-    if (self = [super init]) {
+                newIndexPathMap:(NSMapTable<id<NSObject>, NSIndexPath *> *)newIndexPathMap 
+                
+                {
+    if (self = [super init]) 
+    {
         _inserts = inserts;
         _deletes = deletes;
         _updates = updates;
@@ -23,15 +26,18 @@
     return self;
 }
 
-- (BOOL)hasChanges {
+- (BOOL)hasChanges 
+{
     return self.changeCount > 0;
 }
 
-- (NSInteger)changeCount {
+- (NSInteger)changeCount 
+{
     return self.inserts.count + self.deletes.count + self.updates.count + self.moves.count;
 }
 
-- (IGListIndexPathResult *)resultForBatchUpdates {
+- (IGListIndexPathResult *)resultForBatchUpdates 
+{
     NSMutableSet<NSIndexPath *> *deletes = [NSMutableSet setWithArray:self.deletes];
     NSMutableSet<NSIndexPath *> *inserts = [NSMutableSet setWithArray:self.inserts];
     NSMutableSet<NSIndexPath *> *filteredUpdates = [NSMutableSet setWithArray:self.updates];
@@ -41,9 +47,13 @@
 
     // convert move+update to delete+insert, respecting the from/to of the move
     const NSInteger moveCount = moves.count;
-    for (NSInteger i = moveCount - 1; i >= 0; i--) {
+    
+    for (NSInteger i = moveCount - 1; i >= 0; i--) 
+    {
         IGListMoveIndexPath *move = moves[i];
-        if ([filteredUpdates containsObject:move.from]) {
+        
+        if ([filteredUpdates containsObject:move.from]) 
+        {
             [filteredMoves removeObjectAtIndex:i];
             [filteredUpdates removeObject:move.from];
             [deletes addObject:move.from];
@@ -52,9 +62,12 @@
     }
 
     // iterate all new identifiers. if its index is updated, delete from the old index and insert the new index
-    for (id<NSObject> key in [_oldIndexPathMap keyEnumerator]) {
+    
+    for (id<NSObject> key in [_oldIndexPathMap keyEnumerator])
+    {
         NSIndexPath *indexPath = [_oldIndexPathMap objectForKey:key];
-        if ([filteredUpdates containsObject:indexPath]) {
+        if ([filteredUpdates containsObject:indexPath]) 
+        {
             [deletes addObject:indexPath];
             [inserts addObject:(id)[_newIndexPathMap objectForKey:key]];
         }
