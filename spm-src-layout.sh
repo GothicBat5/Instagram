@@ -1,5 +1,7 @@
 #!/bin/sh
+
 set -e
+
 SPM_IG_LIST_DIFF_KIT_PUBLIC_HEADERS_PATH="spm/Sources/IGListDiffKit/include"
 SPM_IG_LIST_DIFF_KIT_SOURCES_PATH="spm/Sources/IGListDiffKit"
 
@@ -16,6 +18,7 @@ function generate_ig_list_diff_kit_spm_public_headers() {
 
     SRC_ROOT=$(pwd)
     cd $SPM_IG_LIST_DIFF_KIT_PUBLIC_HEADERS_PATH
+    
     for public_file in $public_headers_list; do
         file_to_link=$(echo $public_file | sed "s|:| |g")
         ln -s ../../../../$file_to_link
@@ -26,12 +29,12 @@ function generate_ig_list_diff_kit_spm_public_headers() {
     echo ""
 }
 
-function generate_ig_list_diff_kit_spm_private_headers() {
+function generate_ig_list_diff_kit_spm_private_headers() 
+{
     echo "Generate symbolic links for all private headers *.h"
     echo "Generated under ${SPM_IG_LIST_DIFF_KIT_SOURCES_PATH}"
 
-    private_headers_list=$(
-        find "Source/IGListDiffKit/Internal" \
+    private_headers_list=$(find "Source/IGListDiffKit/Internal" \
         -type f -name "*.h" \
         -not -path "spm/*" | sed "s| \([^/]\)|:\1|g")
 
@@ -52,8 +55,7 @@ function generate_ig_list_diff_kit_spm_sources() {
     echo "Generate symbolic links for all public implementations. *.m & *.mm"
     echo "Generated under ${SPM_IG_LIST_DIFF_KIT_SOURCES_PATH}"
 
-    sources_list=$(
-        find "Source/IGListDiffKit" \
+    sources_list=$(find "Source/IGListDiffKit" \
         -type f -name "*.[m]" -o -name "*.mm" \
         -not -path "spm/*" | sed "s| \([^/]\)|:\1|g")
 
@@ -70,7 +72,8 @@ function generate_ig_list_diff_kit_spm_sources() {
     echo ""
 }
 
-function generate_ig_list_diff_kit() {
+function generate_ig_list_diff_kit() 
+{
     generate_ig_list_diff_kit_spm_public_headers
     generate_ig_list_diff_kit_spm_private_headers
     generate_ig_list_diff_kit_spm_sources
@@ -103,7 +106,8 @@ function generate_ig_list_kit_spm_public_headers() {
     echo ""
 }
 
-function generate_ig_list_kit_spm_private_headers() {
+function generate_ig_list_kit_spm_private_headers() 
+{
     echo "Generate symbolic links for all private headers/implementations *.h && *.m"
     echo "Generated under ${SPM_IG_LIST_KIT_SOURCES_PATH}"
 
@@ -133,7 +137,8 @@ function generate_ig_list_kit_spm_private_headers() {
     echo ""
 }
 
-function generate_ig_list_kit_spm_sources() {
+function generate_ig_list_kit_spm_sources() 
+{
     echo "Generate symbolic links for all public implementations. *.m"
     echo "Generated under ${SPM_IG_LIST_KIT_SOURCES_PATH}"
 
@@ -147,7 +152,6 @@ function generate_ig_list_kit_spm_sources() {
 
     for source_file in $sources_list; do
         file_to_link=$(echo $source_file | sed "s|:| |g")
-
         ln -s ../../../$file_to_link
 
     done
@@ -158,7 +162,8 @@ function generate_ig_list_kit_spm_sources() {
     echo ""
 }
 
-function generate_ig_list_kit() {
+function generate_ig_list_kit() 
+{
     generate_ig_list_kit_spm_public_headers
     generate_ig_list_kit_spm_private_headers
     generate_ig_list_kit_spm_sources
@@ -166,12 +171,12 @@ function generate_ig_list_kit() {
 
 SPM_IG_LIST_SWIFT_KIT_SOURCES_PATH="spm/Sources/IGListSwiftKit"
 
-function generate_ig_list_swift_kit_spm_sources() {
+function generate_ig_list_swift_kit_spm_sources() 
+{
     echo "Generate symbolic links for all public implementations. *.swift"
     echo "Generated under ${SPM_IG_LIST_SWIFT_KIT_SOURCES_PATH}"
 
-    sources_list=$(
-        find "Source/IGListSwiftKit" \ -type f -name "*.swift" \
+    sources_list=$(find "Source/IGListSwiftKit" \ -type f -name "*.swift" \
         -not -path "spm/*" | sed "s| \([^/]\)|:\1|g")
 
     SRC_ROOT=$(pwd)
