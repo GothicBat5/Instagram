@@ -3,10 +3,11 @@
 
 #if !__has_include(<IGListDiffKit/IGListDiffKit.h>)
 #import "IGListAssert.h"
+
 #else
 #import <IGListDiffKit/IGListAssert.h>
-#endif
 
+#endif
 #import "IGListCompatibility.h"
 
 static void convertMoveToDeleteAndInsert(NSMutableSet<IGListMoveIndex *> *moves,
@@ -14,7 +15,6 @@ static void convertMoveToDeleteAndInsert(NSMutableSet<IGListMoveIndex *> *moves,
                                          NSMutableIndexSet *inserts) 
 {
     [moves removeObject:move];
-
     [deletes addIndex:move.from];
     [inserts addIndex:move.to];
 }
