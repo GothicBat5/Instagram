@@ -1,5 +1,7 @@
 # Instagram
 
+![Icon](start/insta.png)
+
 `Instagram` is an American photo and short-form video sharing social networking service owned by `Meta Platforms` 
 It allows users to upload media that can be edited with filters, be organized by `hashtags`, and be associated with a location via geographical tagging. 
 Posts can be shared publicly or with preapproved followers. 
